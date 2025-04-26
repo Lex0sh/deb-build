@@ -23,6 +23,13 @@ if [ -z "$id_docker_image" ]; then
 fi
 
 #-------------------------------------------------------------------------------
+# Checking the packages/ directory or create it.
+
+if [ ! -d "packages" ]; then
+	mkdir packages
+fi
+
+#-------------------------------------------------------------------------------
 # Starting a container.
 
 id_docker_image="$(docker images -q debuilder:v1)"
