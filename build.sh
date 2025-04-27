@@ -11,7 +11,7 @@ id_docker_image="$(docker images -q debuilder:v1)"
 # Checking the parameters.
 
 if [ $# -le 0 ]; then
-	echo "Enter a name software for build deb package"
+	echo "Enter a name software for build deb package and version"
 	exit 1
 fi
 
@@ -43,9 +43,9 @@ docker container run \
 	"cd packages && \
 	mkdir $1 && \
 	cd $1 && \
-	apt source $1 && \
-	cd $(find . -type d -name '$1*' | head -n1) && \
-	apt-get build-dep -y $1 && \
+	apt source $1=$2 && \
+	cd $1-$2 && \
+	apt-get build-dep -y . && \
 	debuild"
 
 #-------------------------------------------------------------------------------
